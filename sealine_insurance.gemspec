@@ -2,17 +2,17 @@
 
 lib = File.expand_path('lib', __dir__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'sl_tech_insurance/version'
+require 'sealine_insurance/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = 'sl_tech_insurance'
-  spec.version       = SlTechInsurance::VERSION
+  spec.name          = 'sealine_insurance'
+  spec.version       = SealineInsurance::VERSION
   spec.authors       = ['Roman Khrebtov']
   spec.email         = ['khrebtov.dev@gmail.com']
 
-  spec.summary       = 'Ruby wrapper for Sl Tech API'
-  spec.description   = 'Ruby wrapper for Sl Tech API'
-  spec.homepage      = 'https://github.com/busfor/sl_tech_insurance'
+  spec.summary       = 'Ruby wrapper for Sealine API'
+  spec.description   = 'Ruby wrapper for Sealine API'
+  spec.homepage      = 'https://github.com/busfor/sealine_insurance'
   spec.license       = 'MIT'
 
   spec.files         = `git ls-files -z`.split("\x0").reject do |f|

@@ -2,5 +2,5 @@
 
 require 'test_helper'
 
-class SlTechInsuranceTest < Minitest::Test
+class SealineInsuranceTest < Minitest::Test
 end

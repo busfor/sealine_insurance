@@ -1,11 +1,11 @@
-# SlTechInsurance
+# SealineInsurance
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'sl_tech_insurance'
+gem 'sealine_insurance'
 ```
 
 And then execute:
@@ -14,7 +14,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install sl_tech_insurance
+    $ gem install sealine_insurance
 
 ## Usage
 
