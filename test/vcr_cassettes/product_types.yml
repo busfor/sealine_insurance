@@ -1,0 +1,45 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://dev.sealine.ru/api/v1/classifiers/product-type.json
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.15.2
+      Authorization:
+      - Token 0123456789abcdef
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.10.3 (Ubuntu)
+      Date:
+      - Wed, 18 Jul 2018 12:55:34 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept
+      X-Frame-Options:
+      - SAMEORIGIN
+      Allow:
+      - GET, OPTIONS
+    body:
+      encoding: UTF-8
+      string: '{"meta":{"previous":null,"total_count":1,"next":null,"limit":20,"offset":0},"objects":[{"id":6,"code":"transport","title":"НС
+        пассажирских перевозок","details":"https://dev.sealine.ru/api/v1/classifiers/product-type/6.json"}]}'
+    http_version:
+  recorded_at: Wed, 18 Jul 2018 12:55:34 GMT
+recorded_with: VCR 4.0.0
