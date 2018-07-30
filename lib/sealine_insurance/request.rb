@@ -9,13 +9,11 @@ module SealineInsurance
     end
 
     def get(url)
-      http_response = send_request(:get, url)
-      parse_response(http_response)
+      send_request(:get, url)
     end
 
     def post(url, data)
-      http_response = send_request(:post, url, data)
-      parse_response(http_response)
+      send_request(:post, url, data)
     end
 
     private
@@ -37,19 +35,6 @@ module SealineInsurance
       end
     rescue Faraday::Error => e
       raise RequestError, "#{e.class}: #{e.message}"
-    end
-
-    def parse_response(http_response)
-      body =
-        begin
-          JSON.parse(http_response.body)
-        rescue JSON::ParserError
-          raise InvalidResponse, 'Invalid JSON'
-        end
-
-      config.logger&.debug(body)
-
-      body
     end
   end
 end

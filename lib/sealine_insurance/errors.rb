@@ -6,7 +6,4 @@ module SealineInsurance
 
   class RequestError < Error
   end
-
-  class InvalidResponse < Error
-  end
 end

@@ -1,0 +1,46 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://dev.sealine.ru/api/v1/calculate-product.json
+    body:
+      encoding: UTF-8
+      string: '{"product_type":"transport","products":["vsk_trans"],"options":["invalid"],"data":{"ticket_price":1}}'
+    headers:
+      User-Agent:
+      - Faraday v0.15.2
+      Authorization:
+      - Token 0123456789abcdef
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 400
+      message: Bad Request
+    headers:
+      Server:
+      - nginx/1.10.3 (Ubuntu)
+      Date:
+      - Fri, 20 Jul 2018 10:21:52 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept
+      X-Frame-Options:
+      - SAMEORIGIN
+      Allow:
+      - GET, POST, OPTIONS
+    body:
+      encoding: UTF-8
+      string: '{"options":["Выбраны недопустимые опции: [''invalid'']"]}'
+    http_version:
+  recorded_at: Fri, 20 Jul 2018 10:21:52 GMT
+recorded_with: VCR 4.0.0

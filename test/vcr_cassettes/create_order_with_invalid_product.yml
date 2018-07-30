@@ -1,0 +1,46 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://dev.sealine.ru/api/v1/order.json
+    body:
+      encoding: UTF-8
+      string: '{"product_type":"transport","product":"invalid","options":[],"data":{"ticket_number":12345678,"ticket_price":1,"departure":"2018-08-01T10:00","arrival":"2018-08-01T18:00","insured":{"first_name":"Иван","last_name":"Иванов","birthday":"1985-01-15"},"insurer":{"first_name":"Петр","last_name":"Петров"}}}'
+    headers:
+      User-Agent:
+      - Faraday v0.15.2
+      Authorization:
+      - Token 0123456789abcdef
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 400
+      message: Bad Request
+    headers:
+      Server:
+      - nginx/1.10.3 (Ubuntu)
+      Date:
+      - Fri, 20 Jul 2018 13:34:55 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept
+      X-Frame-Options:
+      - SAMEORIGIN
+      Allow:
+      - GET, POST, OPTIONS
+    body:
+      encoding: UTF-8
+      string: '{"product":["Недопустимый первичный ключ \"invalid\" - объект не существует."]}'
+    http_version:
+  recorded_at: Fri, 20 Jul 2018 13:34:55 GMT
+recorded_with: VCR 4.0.0
