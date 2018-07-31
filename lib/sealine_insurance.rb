@@ -12,6 +12,7 @@ require 'sealine_insurance/request'
 require 'sealine_insurance/base_response'
 require 'sealine_insurance/calculate_response'
 require 'sealine_insurance/order_response'
+require 'sealine_insurance/payment_response'
 
 module SealineInsurance
   DEFAULT_CURRENCY = 'RUB'

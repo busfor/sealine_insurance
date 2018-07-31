@@ -21,6 +21,11 @@ module SealineInsurance
         @success = false
         @error_code = 'invalid_params'
         @error_message = fetch_validation_error(raw_body)
+      elsif http_response.status == 409
+        # еще один вариант ошибки - 409 Conflict
+        @success = false
+        @error_code = 'conflict'
+        @error_message = raw_body['error']
       else
         # определение ошибки по статусу в JSON
         # если !error_status? - считаем ответ успешным

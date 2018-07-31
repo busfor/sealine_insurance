@@ -1,0 +1,46 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://dev.sealine.ru/api/v1/payment.json
+    body:
+      encoding: UTF-8
+      string: '{"order":9999}'
+    headers:
+      User-Agent:
+      - Faraday v0.15.2
+      Authorization:
+      - Token 0123456789abcdef
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 400
+      message: Bad Request
+    headers:
+      Server:
+      - nginx/1.10.3 (Ubuntu)
+      Date:
+      - Tue, 31 Jul 2018 09:54:10 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept
+      X-Frame-Options:
+      - SAMEORIGIN
+      Allow:
+      - GET, POST, OPTIONS
+    body:
+      encoding: UTF-8
+      string: '{"order":["Недопустимый первичный ключ \"9999\" - объект не существует."]}'
+    http_version:
+  recorded_at: Tue, 31 Jul 2018 09:54:11 GMT
+recorded_with: VCR 4.0.0

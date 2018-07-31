@@ -110,6 +110,11 @@ module SealineInsurance
       OrderResponse.new(response)
     end
 
+    def create_payment(order_id:)
+      response = request.post('/payment', order: order_id)
+      PaymentResponse.new(response)
+    end
+
     private
 
     def request

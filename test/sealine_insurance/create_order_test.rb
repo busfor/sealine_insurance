@@ -2,7 +2,7 @@
 
 require 'test_helper'
 
-describe 'create insurance' do
+describe 'create order' do
   let(:client) do
     SealineInsurance::Client.new(token: '0123456789abcdef')
   end
