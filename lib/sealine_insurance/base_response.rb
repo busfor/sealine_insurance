@@ -2,12 +2,12 @@
 
 module SealineInsurance
   class BaseResponse
-    attr_reader :raw_body
+    attr_reader :body
     attr_reader :error_code
     attr_reader :error_message
 
     def initialize(http_response)
-      @raw_body = parse_response_body(http_response.body)
+      @body = parse_response_body(http_response.body)
       if @error_code
         # ошибка парсинга JSON
         @success = false
@@ -15,23 +15,23 @@ module SealineInsurance
         # ошибка авторизации
         @success = false
         @error_code = 'unauthorized'
-        @error_message = raw_body['detail']
+        @error_message = body['detail']
       elsif http_response.status == 400
         # невалидные входные данные
         @success = false
         @error_code = 'invalid_params'
-        @error_message = fetch_validation_error(raw_body)
+        @error_message = fetch_validation_error(body)
       elsif http_response.status == 409
         # еще один вариант ошибки - 409 Conflict
         @success = false
         @error_code = 'conflict'
-        @error_message = raw_body['error']
+        @error_message = body['error']
       else
         # определение ошибки по статусу в JSON
         # если !error_status? - считаем ответ успешным
         @success = !error_status?
-        @error_code = raw_body['error_code']
-        @error_message = raw_body['error_message']
+        @error_code = body['error_code']
+        @error_message = body['error_message']
       end
     end
 
@@ -46,7 +46,7 @@ module SealineInsurance
     private
 
     # Дочерние классы переопределяют этот метод.
-    # В общем случае статуса в raw_body может не быть, поэтому по дефолту false.
+    # В общем случае статуса в body может не быть, поэтому по дефолту false.
     def error_status?
       false
     end

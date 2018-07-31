@@ -14,7 +14,7 @@ describe 'information methods' do
           client.product_types
         end
 
-      product_types = response.raw_body['objects'].map { |item| item['code'] }
+      product_types = response.body['objects'].map { |item| item['code'] }
 
       assert_equal true, response.success?
       assert_equal %w[transport], product_types
@@ -29,7 +29,7 @@ describe 'information methods' do
         end
 
       product_ids =
-        response.raw_body['results']
+        response.body['results']
           .map { |contractor| contractor['contractor_products'] }
           .flatten
           .map { |product| product['id'] }

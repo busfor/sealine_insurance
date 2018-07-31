@@ -9,15 +9,15 @@ module SealineInsurance
     ].freeze
 
     def payment_id
-      raw_body['id']
+      body['id']
     end
 
     def order_id
-      raw_body['order']
+      body['order']
     end
 
     def status
-      raw_body['status']
+      body['status']
     end
 
     private

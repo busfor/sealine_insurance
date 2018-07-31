@@ -10,11 +10,11 @@ module SealineInsurance
     ].freeze
 
     def request_id
-      raw_body['id']
+      body['id']
     end
 
     def status
-      raw_body['status']
+      body['status']
     end
 
     def calculated?
@@ -22,7 +22,7 @@ module SealineInsurance
     end
 
     def price
-      result = raw_body['results']&.detect { |item| item['status'] == 'DONE' }
+      result = body['results']&.detect { |item| item['status'] == 'DONE' }
       if result && result['price']
         Money.new(result['price'], DEFAULT_CURRENCY)
       end

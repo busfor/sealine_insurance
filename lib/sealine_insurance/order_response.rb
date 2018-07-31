@@ -19,11 +19,11 @@ module SealineInsurance
     ].freeze
 
     def order_id
-      raw_body['id']
+      body['id']
     end
 
     def status
-      raw_body['status']
+      body['status']
     end
 
     def created?
