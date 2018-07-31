@@ -16,6 +16,10 @@ module SealineInsurance
       send_request(:post, url, data)
     end
 
+    def delete(url)
+      send_request(:delete, url)
+    end
+
     private
 
     def send_request(method, url, body = nil)

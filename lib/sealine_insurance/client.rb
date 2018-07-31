@@ -115,6 +115,12 @@ module SealineInsurance
       PaymentResponse.new(response)
     end
 
+    def cancel_order(**args)
+      operation = CancelOrder.new(config: config, arguments: args)
+      operation.call
+      operation
+    end
+
     private
 
     def request

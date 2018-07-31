@@ -35,6 +35,9 @@ Metrics/LineLength:
 Metrics/MethodLength:
   Max: 40
 
+Metrics/ClassLength:
+  Max: 150
+
 Metrics/BlockLength:
   Exclude:
     - 'test/**/*'
