@@ -30,6 +30,22 @@ module SealineInsurance
       status == 'NEED_PAYMENT'
     end
 
+    def confirmed?
+      status == 'DONE'
+    end
+
+    def price
+      Money.new(body['price'], DEFAULT_CURRENCY) if body['price']
+    end
+
+    def documents
+      body['documents'] || []
+    end
+
+    def external_numbers
+      body['external_numbers'] || []
+    end
+
     private
 
     def error_status?

@@ -1,0 +1,44 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://dev.sealine.ru/api/v1/order/7212.json
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.15.2
+      Authorization:
+      - Token 0123456789abcdef
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.10.3 (Ubuntu)
+      Date:
+      - Tue, 31 Jul 2018 11:32:06 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept
+      X-Frame-Options:
+      - SAMEORIGIN
+      Allow:
+      - GET, PUT, PATCH, DELETE, OPTIONS
+    body:
+      encoding: UTF-8
+      string: '{"id":7212,"contractor":{"id":6,"name":"ВСК","code":"vsk"},"product":"vsk_trans","data":{"arrival":"2018-08-01T18:00","insurer":{"first_name":"Петр","last_name":"Петров"},"departure":"2018-08-01T10:00","insured":{"last_name":"Иванов","first_name":"Иван","birthday":"1985-01-15"},"currency_rates":{"RUB":"1.0000","RUR":"1.0000","USD":"63.4888","EUR":"73.9327"},"ticket_number":12345678,"ticket_price":1},"options":[],"result_data":{"start_date":"01.08.2018","end_date":"01.08.2018"},"price":"70.00","net_partner_premium":"0.00","documents":["http://example.com/document.pdf"],"external_numbers":["180H368S00008"],"linked_orders":[],"status":"DONE","error_code":null,"error_message":null,"created_at":"2018-07-20T16:25:15.785590","updated_at":"2018-07-31T12:49:11.467191"}'
+    http_version:
+  recorded_at: Tue, 31 Jul 2018 11:32:06 GMT
+recorded_with: VCR 4.0.0
