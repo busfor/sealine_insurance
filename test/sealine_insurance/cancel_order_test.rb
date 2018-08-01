@@ -30,7 +30,7 @@ describe 'cancel order' do
       assert_equal 7212, operation.response.order_id
       assert_equal 'CANCEL_IN_PROGRESS', operation.response.status
 
-      operation.fetch_result!
+      operation.fetch_status!
 
       assert_equal true, operation.finished?
       assert_equal true, operation.success?

@@ -24,7 +24,7 @@ module SealineInsurance
         @request_id = @response.request_id
       end
 
-      def fetch_result!
+      def fetch_status!
         return unless @request_id
 
         raw_response = request.get("/calculate-product/#{@request_id}")

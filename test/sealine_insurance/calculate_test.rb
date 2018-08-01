@@ -19,7 +19,7 @@ describe 'calculate insurance price' do
       response = operation.response
       assert_equal 'IN_PROGRESS', response.status
 
-      operation.fetch_result!
+      operation.fetch_status!
       assert_equal true, operation.finished?
       assert_equal true, operation.success?
 

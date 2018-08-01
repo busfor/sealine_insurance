@@ -18,10 +18,6 @@ module SealineInsurance
       classifiers(path: 'product')
     end
 
-    def component_groups
-      classifiers(path: 'product/component-group')
-    end
-
     def calculate_status_list
       classifiers(path: 'status/calculate-product')
     end

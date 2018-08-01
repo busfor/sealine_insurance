@@ -60,7 +60,7 @@ module SealineInsurance
         @order_id = @response.order_id
       end
 
-      def fetch_result!
+      def fetch_status!
         raw_response = request.get("/order/#{@order_id}")
         @response = Responses::Order.new(raw_response)
       end

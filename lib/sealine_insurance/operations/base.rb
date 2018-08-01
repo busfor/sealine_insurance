@@ -20,18 +20,18 @@ module SealineInsurance
       end
 
       # Получение актуального статуса выполнения и результата
-      def fetch_result!
+      def fetch_status!
         raise NotImplementedError
       end
 
       # Завершена ли операция (с успехом или ошибкой)
       def finished?
-        finished_status_list.include?(response.status) || response.error?
+        response.error? || finished_status_list.include?(response.status)
       end
 
       # Завершена ли операция с успехом
       def success?
-        success_status_list.include?(response.status)
+        response.success? && success_status_list.include?(response.status)
       end
 
       # Окончательный результат операции (успешный или нет)
