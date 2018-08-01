@@ -87,22 +87,31 @@ operation = client.calculate(
 )
 ```
 
-Проверка статуса операции:
+Операция может быть завершена сразу, при первом запросе.
+
+Метод `finished?` проверяет статус без дополнительного запроса к API:
 
 ```ruby
 operation.finished?
 # => false
 ```
 
-Запрос актуального статуса:
+Далее необходимо запрашивать актуальный статус из API до тех пор, пока `finished?` не вернет `true`.
+
+**Метод `finished?` не делает дополнительных запросов к API**, за это отвечает метод `fetch_status!`:
 
 ```ruby
+operation.fetch_status!
+operation.finished?
+# => false
+
+sleep(2)
 operation.fetch_status!
 operation.finished?
 # => true
 ```
 
-Получение результата:
+После завершения операции можно получить ее результат:
 
 ```ruby
 operation.success?
@@ -113,7 +122,7 @@ operation.result.price
 # => #<Money fractional:70 currency:RUB>
 ```
 
-Или с ошибкой:
+Если с ошибкой:
 
 ```ruby
 operation.success?
