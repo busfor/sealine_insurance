@@ -1,0 +1,87 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://dev.sealine.ru/api/v1/payment.json
+    body:
+      encoding: UTF-8
+      string: '{"order":7311}'
+    headers:
+      User-Agent:
+      - Faraday v0.15.2
+      Authorization:
+      - Token 0123456789abcdef
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Server:
+      - nginx/1.10.3 (Ubuntu)
+      Date:
+      - Tue, 31 Jul 2018 17:21:38 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept
+      X-Frame-Options:
+      - SAMEORIGIN
+      Allow:
+      - GET, POST, OPTIONS
+    body:
+      encoding: UTF-8
+      string: '{"id":4002,"premium":0.0,"currency":"RUB","status":"IN_PROGRESS","error_code":null,"error_message":"","created_at":"2018-07-31T20:21:38.583376","updated_at":"2018-07-31T20:21:38.583414","order":7311}'
+    http_version:
+  recorded_at: Tue, 31 Jul 2018 17:21:38 GMT
+- request:
+    method: get
+    uri: https://dev.sealine.ru/api/v1/order/7311.json
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.15.2
+      Authorization:
+      - Token 0123456789abcdef
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.10.3 (Ubuntu)
+      Date:
+      - Tue, 31 Jul 2018 17:21:39 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept
+      X-Frame-Options:
+      - SAMEORIGIN
+      Allow:
+      - GET, PUT, PATCH, DELETE, OPTIONS
+    body:
+      encoding: UTF-8
+      string: '{"id":7311,"contractor":{"id":6,"name":"ВСК","code":"vsk"},"product":"vsk_trans","data":{"arrival":"2018-08-01T18:00","insurer":{"first_name":"Петр","last_name":"Петров"},"departure":"2018-08-01T10:00","insured":{"last_name":"Иванов","first_name":"Иван","birthday":"1985-01-15"},"currency_rates":{"RUB":"1.0000","RUR":"1.0000","USD":"62.3497","EUR":"73.0738"},"ticket_number":12345678,"ticket_price":1},"options":[],"result_data":{"premium":"70.00","end_date":"01.08.2018","program_type":"vsk_trans_tob","premium_currency":"RUB","coverage_currency":"RUB","coverage":200000,"start_date":"01.08.2018"},"price":"70.00","net_partner_premium":"0.00","documents":["https://dev.sealine.ru/media/contractor-orders/2018/07/31/vsk_int7187.pdf?t=eyJ0b2tlbiI6IjYxN2FiMGEwZTBkMTJlMjQ4YTliNTVmYWVmYmJmNzcwMGVlNjhlNzQiLCJpZCI6NzE4N30%3A1fkYSu%3AxMmFmI1wTaCzShewVLnSCX8Bx8k"],"external_numbers":["180H368S00014"],"linked_orders":[],"status":"DONE","error_code":null,"error_message":null,"created_at":"2018-07-31T20:10:57.318379","updated_at":"2018-07-31T20:21:43.186297"}'
+    http_version:
+  recorded_at: Tue, 31 Jul 2018 17:21:39 GMT
+recorded_with: VCR 4.0.0

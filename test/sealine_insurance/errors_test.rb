@@ -3,7 +3,7 @@
 require 'test_helper'
 
 describe 'errors' do
-  it 'raises InvalidResponseError for invalid json' do
+  it 'returns error response for invalid json' do
     client = SealineInsurance::Client.new(token: '0123456789abcdef')
 
     response =
@@ -17,7 +17,7 @@ describe 'errors' do
     assert_equal 'Invalid JSON', response.error_message
   end
 
-  it 'raises UnauthorizedError for invalid token' do
+  it 'returns error response for invalid token' do
     client = SealineInsurance::Client.new(token: 'invalid')
 
     response =

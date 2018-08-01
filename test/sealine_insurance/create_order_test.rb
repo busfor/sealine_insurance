@@ -23,47 +23,37 @@ describe 'create order' do
     }
   end
 
-  describe 'base flow' do
-    it 'creates order' do
-      response =
-        VCR.use_cassette('create_order') do
-          client.create_order(**valid_params)
-        end
+  it 'creates order and returns result' do
+    VCR.use_cassette('create_order_and_fetch_reslult') do
+      operation = client.create_order(**valid_params)
+      assert_equal false, operation.finished?
 
-      assert_equal 7212, response.order_id
+      response = operation.response
+      assert_equal 7311, response.order_id
       assert_equal 'IN_PROGRESS', response.status
 
-      assert_equal true, response.success?
-      assert_equal false, response.error?
+      operation.fetch_result!
+      assert_equal true, operation.finished?
+      assert_equal true, operation.success?
 
-      assert_equal false, response.created?
-    end
-
-    it 'returns success result' do
-      response =
-        VCR.use_cassette('create_order_status') do
-          client.get_order(order_id: 7212)
-        end
-
-      assert_equal 7212, response.order_id
+      response = operation.response
+      assert_equal 7311, response.order_id
       assert_equal 'NEED_PAYMENT', response.status
-
-      assert_equal true, response.success?
-      assert_equal false, response.error?
-
-      assert_equal true, response.created?
+      assert_equal Money.new(70, 'RUB'), response.price
     end
   end
 
   describe 'params validation errors' do
     it 'returns error with invalid product' do
-      response =
+      operation =
         VCR.use_cassette('create_order_with_invalid_product') do
           client.create_order(**valid_params.merge(product: 'invalid'))
         end
 
-      assert_equal false, response.success?
-      assert_equal true, response.error?
+      assert_equal true, operation.finished?
+      assert_equal false, operation.success?
+
+      response = operation.response
       assert_equal 'invalid_params', response.error_code
       assert_equal(
         'product: Недопустимый первичный ключ "invalid" - объект не существует.',
@@ -72,7 +62,7 @@ describe 'create order' do
     end
 
     it 'returns error with invalid arrival_datetime' do
-      response =
+      operation =
         VCR.use_cassette('create_order_with_invalid_arrival_datetime') do
           client.create_order(
             **valid_params.merge(
@@ -81,8 +71,10 @@ describe 'create order' do
           )
         end
 
-      assert_equal false, response.success?
-      assert_equal true, response.error?
+      assert_equal true, operation.finished?
+      assert_equal false, operation.success?
+
+      response = operation.response
       assert_equal 'invalid_params', response.error_code
       assert_equal(
         'data.arrival: Не может быть меньше даты trip.departure.date',
@@ -91,13 +83,15 @@ describe 'create order' do
     end
 
     it 'returns error with empty insured_first_name' do
-      response =
+      operation =
         VCR.use_cassette('create_order_with_empty_insured_first_name') do
           client.create_order(**valid_params.merge(insured_first_name: nil))
         end
 
-      assert_equal false, response.success?
-      assert_equal true, response.error?
+      assert_equal true, operation.finished?
+      assert_equal false, operation.success?
+
+      response = operation.response
       assert_equal 'invalid_params', response.error_code
       assert_equal(
         "data.insured.first_name: Ошибка валидации схемы. Сообщение: None is not of type u'string'",

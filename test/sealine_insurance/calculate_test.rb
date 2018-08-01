@@ -7,49 +7,31 @@ describe 'calculate insurance price' do
     SealineInsurance::Client.new(token: '0123456789abcdef')
   end
 
-  describe 'base flow' do
-    it 'creates calculation' do
-      response =
-        VCR.use_cassette('calculate') do
-          client.calculate(
-            product_type: 'transport',
-            products: %w[vsk_trans],
-            ticket_price: Money.new(100, 'RUB'),
-          )
-        end
+  it 'calculates price and returns result' do
+    VCR.use_cassette('calculate_and_fetch_result') do
+      operation = client.calculate(
+        product_type: 'transport',
+        products: %w[vsk_trans],
+        ticket_price: Money.new(100, 'RUB'),
+      )
+      assert_equal false, operation.finished?
 
-      assert_equal 89234, response.request_id
+      response = operation.response
       assert_equal 'IN_PROGRESS', response.status
 
-      assert_equal true, response.success?
-      assert_equal false, response.error?
+      operation.fetch_result!
+      assert_equal true, operation.finished?
+      assert_equal true, operation.success?
 
-      assert_equal false, response.calculated?
-      assert_nil response.price
-    end
-
-    it 'returns success result' do
-      response =
-        VCR.use_cassette('calculate_status') do
-          client.calculate_status(
-            request_id: 89234,
-          )
-        end
-
-      assert_equal 89234, response.request_id
+      response = operation.response
       assert_equal 'DONE', response.status
-
-      assert_equal true, response.success?
-      assert_equal false, response.error?
-
-      assert_equal true, response.calculated?
       assert_equal Money.new(70, 'RUB'), response.price
     end
   end
 
   describe 'params validation errors' do
     it 'returns error with invalid product_type' do
-      response =
+      operation =
         VCR.use_cassette('calculate_with_invalid_product_type') do
           client.calculate(
             product_type: 'invalid',
@@ -58,8 +40,10 @@ describe 'calculate insurance price' do
           )
         end
 
-      assert_equal false, response.success?
-      assert_equal true, response.error?
+      assert_equal true, operation.finished?
+      assert_equal false, operation.success?
+
+      response = operation.response
       assert_equal 'invalid_params', response.error_code
       assert_equal(
         'product_type: Некорректное значение. Используйте `code` из /classifiers/product-type/',
@@ -68,7 +52,7 @@ describe 'calculate insurance price' do
     end
 
     it 'returns error with invalid products' do
-      response =
+      operation =
         VCR.use_cassette('calculate_with_invalid_product') do
           client.calculate(
             product_type: 'transport',
@@ -77,14 +61,16 @@ describe 'calculate insurance price' do
           )
         end
 
-      assert_equal false, response.success?
-      assert_equal true, response.error?
+      assert_equal true, operation.finished?
+      assert_equal false, operation.success?
+
+      response = operation.response
       assert_equal 'invalid_params', response.error_code
       assert_equal 'products: Продукт (invalid) не доступен', response.error_message
     end
 
     it 'returns error with invalid options' do
-      response =
+      operation =
         VCR.use_cassette('calculate_with_invalid_options') do
           client.calculate(
             product_type: 'transport',
@@ -94,8 +80,10 @@ describe 'calculate insurance price' do
           )
         end
 
-      assert_equal false, response.success?
-      assert_equal true, response.error?
+      assert_equal true, operation.finished?
+      assert_equal false, operation.success?
+
+      response = operation.response
       assert_equal 'invalid_params', response.error_code
       assert_equal "options: Выбраны недопустимые опции: ['invalid']", response.error_message
     end

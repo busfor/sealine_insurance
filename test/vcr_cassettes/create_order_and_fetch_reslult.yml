@@ -1,0 +1,87 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://dev.sealine.ru/api/v1/order.json
+    body:
+      encoding: UTF-8
+      string: '{"product_type":"transport","product":"vsk_trans","options":[],"data":{"ticket_number":12345678,"ticket_price":1,"departure":"2018-08-01T10:00","arrival":"2018-08-01T18:00","insured":{"first_name":"Иван","last_name":"Иванов","birthday":"1985-01-15"},"insurer":{"first_name":"Петр","last_name":"Петров"}}}'
+    headers:
+      User-Agent:
+      - Faraday v0.15.2
+      Authorization:
+      - Token 0123456789abcdef
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Server:
+      - nginx/1.10.3 (Ubuntu)
+      Date:
+      - Tue, 31 Jul 2018 17:10:57 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept
+      X-Frame-Options:
+      - SAMEORIGIN
+      Allow:
+      - GET, POST, OPTIONS
+    body:
+      encoding: UTF-8
+      string: '{"id":7311,"data":{"arrival":"2018-08-01T18:00","insurer":{"first_name":"Петр","last_name":"Петров"},"departure":"2018-08-01T10:00","insured":{"first_name":"Иван","last_name":"Иванов","birthday":"1985-01-15"},"currency_rates":{"RUB":"1.0000","RUR":"1.0000","USD":"62.3497","EUR":"73.0738"},"ticket_number":12345678,"ticket_price":1},"options":[],"contractor":{"id":6,"name":"ВСК","code":"vsk"},"product":"vsk_trans","status":"IN_PROGRESS","error_code":null,"error_message":null,"created_at":"2018-07-31T20:10:57.318379","updated_at":"2018-07-31T20:10:57.327714"}'
+    http_version:
+  recorded_at: Tue, 31 Jul 2018 17:10:57 GMT
+- request:
+    method: get
+    uri: https://dev.sealine.ru/api/v1/order/7311.json
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.15.2
+      Authorization:
+      - Token 0123456789abcdef
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.10.3 (Ubuntu)
+      Date:
+      - Tue, 31 Jul 2018 17:11:00 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept
+      X-Frame-Options:
+      - SAMEORIGIN
+      Allow:
+      - GET, PUT, PATCH, DELETE, OPTIONS
+    body:
+      encoding: UTF-8
+      string: '{"id":7311,"contractor":{"id":6,"name":"ВСК","code":"vsk"},"product":"vsk_trans","data":{"arrival":"2018-08-01T18:00","insurer":{"first_name":"Петр","last_name":"Петров"},"departure":"2018-08-01T10:00","insured":{"last_name":"Иванов","first_name":"Иван","birthday":"1985-01-15"},"currency_rates":{"RUB":"1.0000","RUR":"1.0000","USD":"62.3497","EUR":"73.0738"},"ticket_number":12345678,"ticket_price":1},"options":[],"result_data":{},"price":"70.00","net_partner_premium":"0.00","documents":[],"external_numbers":[],"linked_orders":[],"status":"NEED_PAYMENT","error_code":null,"error_message":null,"created_at":"2018-07-31T20:10:57.318379","updated_at":"2018-07-31T20:10:57.443545"}'
+    http_version:
+  recorded_at: Tue, 31 Jul 2018 17:11:00 GMT
+recorded_with: VCR 4.0.0
