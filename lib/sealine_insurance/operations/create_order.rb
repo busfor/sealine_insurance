@@ -3,15 +3,6 @@
 module SealineInsurance
   module Operations
     class CreateOrder < Base
-      FINISHED_STATES = [
-        'ERROR',          # Ошибка
-        'NEED_PAYMENT',   # Требуется оплата
-      ].freeze
-
-      SUCCESS_STATES = [
-        'NEED_PAYMENT',   # Требуется оплата
-      ].freeze
-
       # rubocop:disable Metrics/ParameterLists
       def initialize(
         config:,
@@ -74,12 +65,17 @@ module SealineInsurance
         @response = Responses::Order.new(raw_response)
       end
 
-      def finished?
-        FINISHED_STATES.include?(response.status) || response.error?
+      private
+
+      def finished_status_list
+        @finished_status_list ||= [
+          'ERROR',          # Ошибка
+          'NEED_PAYMENT',   # Требуется оплата
+        ]
       end
 
-      def success?
-        SUCCESS_STATES.include?(response.status)
+      def success_status_list
+        @success_status_list ||= ['NEED_PAYMENT']
       end
     end
   end

@@ -3,15 +3,6 @@
 module SealineInsurance
   module Operations
     class CreatePayment < Base
-      FINISHED_STATES = [
-        'DONE',   # Выполнено
-        'ERROR',  # Ошибка
-      ].freeze
-
-      SUCCESS_STATES = [
-        'DONE',   # Выполнено
-      ].freeze
-
       def initialize(config:, order_id:)
         super(config: config)
         @order_id = order_id
@@ -27,12 +18,17 @@ module SealineInsurance
         @response = Responses::Order.new(raw_response)
       end
 
-      def finished?
-        FINISHED_STATES.include?(response.status) || response.error?
+      private
+
+      def finished_status_list
+        @finished_status_list ||= [
+          'DONE',   # Выполнено
+          'ERROR',  # Ошибка
+        ]
       end
 
-      def success?
-        SUCCESS_STATES.include?(response.status)
+      def success_status_list
+        @success_status_list ||= ['DONE']
       end
     end
   end

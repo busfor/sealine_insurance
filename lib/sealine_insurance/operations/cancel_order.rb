@@ -3,16 +3,6 @@
 module SealineInsurance
   module Operations
     class CancelOrder < Base
-      FINISHED_STATES = [
-        'REPEAT_CANCELLATION', # Требуется повтор отмены
-        'NOT_CANCELLED',       # Не отменен
-        'CANCELLED',           # Отменен
-      ].freeze
-
-      SUCCESS_STATES = [
-        'CANCELLED',           # Отменен
-      ].freeze
-
       def initialize(config:, order_id:)
         super(config: config)
         @order_id = order_id
@@ -28,12 +18,18 @@ module SealineInsurance
         @response = Responses::Order.new(raw_response)
       end
 
-      def finished?
-        FINISHED_STATES.include?(response.status) || response.error?
+      private
+
+      def finished_status_list
+        @finished_status_list ||= [
+          'REPEAT_CANCELLATION', # Требуется повтор отмены
+          'NOT_CANCELLED',       # Не отменен
+          'CANCELLED',           # Отменен
+        ]
       end
 
-      def success?
-        SUCCESS_STATES.include?(response.status)
+      def success_status_list
+        @success_status_list ||= ['CANCELLED']
       end
     end
   end

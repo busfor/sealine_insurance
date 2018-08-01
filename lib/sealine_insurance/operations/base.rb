@@ -26,12 +26,12 @@ module SealineInsurance
 
       # Завершена ли операция (с успехом или ошибкой)
       def finished?
-        raise NotImplementedError
+        finished_status_list.include?(response.status) || response.error?
       end
 
       # Завершена ли операция с успехом
       def success?
-        raise NotImplementedError
+        success_status_list.include?(response.status)
       end
 
       # Окончательный результат операции (успешный или нет)
@@ -40,6 +40,16 @@ module SealineInsurance
       end
 
       private
+
+      # Массив статусов, соответствующий завершенной операции
+      def finished_status_list
+        raise NotImplementedError
+      end
+
+      # Массив статусов, соответствующий успешно завершенной операции
+      def success_status_list
+        raise NotImplementedError
+      end
 
       def request
         @request ||= Request.new(config: @config)

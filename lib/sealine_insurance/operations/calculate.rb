@@ -3,16 +3,6 @@
 module SealineInsurance
   module Operations
     class Calculate < Base
-      FINISHED_STATES = [
-        'DONE',             # Выполнено
-        'DONE_WITH_ERRORS', # Выполнено с ошибками
-        'ERROR',            # Ошибка
-      ].freeze
-
-      SUCCESS_STATES = [
-        'DONE',             # Выполнено
-      ].freeze
-
       def initialize(config:, product_type:, products:, ticket_price:, options: [])
         super(config: config)
         @product_type = product_type
@@ -41,12 +31,18 @@ module SealineInsurance
         @response = Responses::Calculate.new(raw_response)
       end
 
-      def finished?
-        FINISHED_STATES.include?(response.status) || response.error?
+      private
+
+      def finished_status_list
+        @finished_status_list ||= [
+          'DONE',             # Выполнено
+          'DONE_WITH_ERRORS', # Выполнено с ошибками
+          'ERROR',            # Ошибка
+        ]
       end
 
-      def success?
-        SUCCESS_STATES.include?(response.status)
+      def success_status_list
+        @success_status_list ||= ['DONE']
       end
     end
   end
