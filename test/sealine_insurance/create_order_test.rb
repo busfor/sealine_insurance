@@ -39,7 +39,7 @@ describe 'create order' do
       result = operation.result
       assert_equal 7311, result.order_id
       assert_equal 'NEED_PAYMENT', result.status
-      assert_equal Money.new(70, 'RUB'), result.price
+      assert_equal Money.new(70_00, 'RUB'), result.price
     end
   end
 

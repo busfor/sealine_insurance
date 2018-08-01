@@ -25,7 +25,7 @@ describe 'calculate insurance price' do
 
       result = operation.result
       assert_equal 'DONE', result.status
-      assert_equal Money.new(70, 'RUB'), result.price
+      assert_equal Money.new(70_00, 'RUB'), result.price
     end
   end
 

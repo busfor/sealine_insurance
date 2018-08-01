@@ -21,7 +21,7 @@ module SealineInsurance
       def price
         result = body['results']&.detect { |item| item['status'] == 'DONE' }
         if result && result['price']
-          Money.new(result['price'], DEFAULT_CURRENCY)
+          Money.from_amount(result['price'].to_f, DEFAULT_CURRENCY)
         end
       end
     end

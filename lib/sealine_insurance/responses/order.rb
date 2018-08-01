@@ -28,7 +28,7 @@ module SealineInsurance
       end
 
       def price
-        Money.new(body['price'], DEFAULT_CURRENCY) if body['price']
+        Money.from_amount(body['price'].to_f, DEFAULT_CURRENCY) if body['price']
       end
 
       def documents
