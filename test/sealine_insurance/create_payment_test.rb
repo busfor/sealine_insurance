@@ -19,13 +19,13 @@ describe 'create payment' do
       assert_equal true, operation.finished?
       assert_equal true, operation.success?
 
-      response = operation.response
-      assert_equal 'DONE', response.status
-      assert_equal Money.new(70, 'RUB'), response.price
-      assert_equal ['180H368S00014'], response.external_numbers
+      result = operation.result
+      assert_equal 'DONE', result.status
+      assert_equal Money.new(70, 'RUB'), result.price
+      assert_equal ['180H368S00014'], result.external_numbers
       assert_equal(
         ['https://dev.sealine.ru/media/contractor-orders/2018/07/31/vsk_int7187.pdf?t=eyJ0b2tlbiI6IjYxN2FiMGEwZTBkMTJlMjQ4YTliNTVmYWVmYmJmNzcwMGVlNjhlNzQiLCJpZCI6NzE4N30%3A1fkYSu%3AxMmFmI1wTaCzShewVLnSCX8Bx8k'],
-        response.documents,
+        result.documents,
       )
     end
   end
@@ -39,11 +39,11 @@ describe 'create payment' do
     assert_equal true, operation.finished?
     assert_equal false, operation.success?
 
-    response = operation.response
-    assert_equal 'conflict', response.error_code
+    result = operation.result
+    assert_equal 'conflict', result.error_code
     assert_equal(
       'Некорректный статус заказа для проведения оплаты: Создан',
-      response.error_message,
+      result.error_message,
     )
   end
 
@@ -56,11 +56,11 @@ describe 'create payment' do
     assert_equal true, operation.finished?
     assert_equal false, operation.success?
 
-    response = operation.response
-    assert_equal 'invalid_params', response.error_code
+    result = operation.result
+    assert_equal 'invalid_params', result.error_code
     assert_equal(
       'order: Недопустимый первичный ключ "9999" - объект не существует.',
-      response.error_message,
+      result.error_message,
     )
   end
 end

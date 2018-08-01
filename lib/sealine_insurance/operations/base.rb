@@ -7,6 +7,7 @@
 module SealineInsurance
   module Operations
     class Base
+      # Промежуточный ответ сервера
       attr_reader :response
 
       def initialize(config:)
@@ -31,6 +32,11 @@ module SealineInsurance
       # Завершена ли операция с успехом
       def success?
         raise NotImplementedError
+      end
+
+      # Окончательный результат операции (успешный или нет)
+      def result
+        response if finished?
       end
 
       private

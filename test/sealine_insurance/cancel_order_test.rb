@@ -16,9 +16,9 @@ describe 'cancel order' do
     assert_equal true, operation.finished?
     assert_equal true, operation.success?
 
-    response = operation.response
-    assert_equal 7212, response.order_id
-    assert_equal 'CANCELLED', response.status
+    result = operation.result
+    assert_equal 7212, result.order_id
+    assert_equal 'CANCELLED', result.status
   end
 
   it 'returns result after multiple requests' do
@@ -34,8 +34,8 @@ describe 'cancel order' do
 
       assert_equal true, operation.finished?
       assert_equal true, operation.success?
-      assert_equal 7212, operation.response.order_id
-      assert_equal 'CANCELLED', operation.response.status
+      assert_equal 7212, operation.result.order_id
+      assert_equal 'CANCELLED', operation.result.status
     end
   end
 end

@@ -23,9 +23,9 @@ describe 'calculate insurance price' do
       assert_equal true, operation.finished?
       assert_equal true, operation.success?
 
-      response = operation.response
-      assert_equal 'DONE', response.status
-      assert_equal Money.new(70, 'RUB'), response.price
+      result = operation.result
+      assert_equal 'DONE', result.status
+      assert_equal Money.new(70, 'RUB'), result.price
     end
   end
 
@@ -43,11 +43,11 @@ describe 'calculate insurance price' do
       assert_equal true, operation.finished?
       assert_equal false, operation.success?
 
-      response = operation.response
-      assert_equal 'invalid_params', response.error_code
+      result = operation.result
+      assert_equal 'invalid_params', result.error_code
       assert_equal(
         'product_type: Некорректное значение. Используйте `code` из /classifiers/product-type/',
-        response.error_message,
+        result.error_message,
       )
     end
 
@@ -64,9 +64,9 @@ describe 'calculate insurance price' do
       assert_equal true, operation.finished?
       assert_equal false, operation.success?
 
-      response = operation.response
-      assert_equal 'invalid_params', response.error_code
-      assert_equal 'products: Продукт (invalid) не доступен', response.error_message
+      result = operation.result
+      assert_equal 'invalid_params', result.error_code
+      assert_equal 'products: Продукт (invalid) не доступен', result.error_message
     end
 
     it 'returns error with invalid options' do
@@ -83,9 +83,9 @@ describe 'calculate insurance price' do
       assert_equal true, operation.finished?
       assert_equal false, operation.success?
 
-      response = operation.response
-      assert_equal 'invalid_params', response.error_code
-      assert_equal "options: Выбраны недопустимые опции: ['invalid']", response.error_message
+      result = operation.result
+      assert_equal 'invalid_params', result.error_code
+      assert_equal "options: Выбраны недопустимые опции: ['invalid']", result.error_message
     end
   end
 end

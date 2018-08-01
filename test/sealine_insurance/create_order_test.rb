@@ -36,10 +36,10 @@ describe 'create order' do
       assert_equal true, operation.finished?
       assert_equal true, operation.success?
 
-      response = operation.response
-      assert_equal 7311, response.order_id
-      assert_equal 'NEED_PAYMENT', response.status
-      assert_equal Money.new(70, 'RUB'), response.price
+      result = operation.result
+      assert_equal 7311, result.order_id
+      assert_equal 'NEED_PAYMENT', result.status
+      assert_equal Money.new(70, 'RUB'), result.price
     end
   end
 
@@ -53,11 +53,11 @@ describe 'create order' do
       assert_equal true, operation.finished?
       assert_equal false, operation.success?
 
-      response = operation.response
-      assert_equal 'invalid_params', response.error_code
+      result = operation.result
+      assert_equal 'invalid_params', result.error_code
       assert_equal(
         'product: Недопустимый первичный ключ "invalid" - объект не существует.',
-        response.error_message,
+        result.error_message,
       )
     end
 
@@ -74,11 +74,11 @@ describe 'create order' do
       assert_equal true, operation.finished?
       assert_equal false, operation.success?
 
-      response = operation.response
-      assert_equal 'invalid_params', response.error_code
+      result = operation.result
+      assert_equal 'invalid_params', result.error_code
       assert_equal(
         'data.arrival: Не может быть меньше даты trip.departure.date',
-        response.error_message,
+        result.error_message,
       )
     end
 
@@ -91,11 +91,11 @@ describe 'create order' do
       assert_equal true, operation.finished?
       assert_equal false, operation.success?
 
-      response = operation.response
-      assert_equal 'invalid_params', response.error_code
+      result = operation.result
+      assert_equal 'invalid_params', result.error_code
       assert_equal(
         "data.insured.first_name: Ошибка валидации схемы. Сообщение: None is not of type u'string'",
-        response.error_message,
+        result.error_message,
       )
     end
   end
