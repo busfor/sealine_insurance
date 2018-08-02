@@ -19,10 +19,17 @@ module SealineInsurance
       end
 
       def price
-        result = body['results']&.detect { |item| item['status'] == 'DONE' }
-        if result && result['price']
-          Money.from_amount(result['price'].to_f, DEFAULT_CURRENCY)
-        end
+        to_money(result['price'])
+      end
+
+      def coverage
+        to_money(result.dig('result_data', 'coverage'))
+      end
+
+      private
+
+      def result
+        @result ||= body['results']&.detect { |item| item['status'] == 'DONE' } || {}
       end
     end
   end

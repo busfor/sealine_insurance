@@ -72,6 +72,10 @@ module SealineInsurance
           "#{key_path.join('.')}: #{data}"
         end
       end
+
+      def to_money(raw_value)
+        Money.from_amount(raw_value.to_f, DEFAULT_CURRENCY) if raw_value
+      end
     end
   end
 end
