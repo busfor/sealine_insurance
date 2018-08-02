@@ -31,6 +31,10 @@ module SealineInsurance
         to_money(body['price'])
       end
 
+      def coverage
+        to_money(body.dig('result_data', 'coverage'))
+      end
+
       def documents
         body['documents'] || []
       end

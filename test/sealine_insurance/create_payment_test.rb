@@ -22,6 +22,7 @@ describe 'create payment' do
       result = operation.result
       assert_equal 'DONE', result.status
       assert_equal Money.new(70_00, 'RUB'), result.price
+      assert_equal Money.new(200_000_00, 'RUB'), result.coverage
       assert_equal ['180H368S00014'], result.external_numbers
       assert_equal(
         ['https://dev.sealine.ru/media/contractor-orders/2018/07/31/vsk_int7187.pdf?t=eyJ0b2tlbiI6IjYxN2FiMGEwZTBkMTJlMjQ4YTliNTVmYWVmYmJmNzcwMGVlNjhlNzQiLCJpZCI6NzE4N30%3A1fkYSu%3AxMmFmI1wTaCzShewVLnSCX8Bx8k'],
