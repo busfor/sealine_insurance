@@ -24,15 +24,14 @@ module SealineInsurance
 
     def send_request(method, url, body = nil)
       conn = Faraday.new do |builder|
+        builder.response(:logger, config.logger, bodies: true) if config.logger
         builder.adapter Faraday.default_adapter
-        builder.response(:logger, config.logger) if config.logger
       end
       conn.send(method, "#{config.base_url}#{url}.json") do |req|
         req.headers['Authorization'] = "Token #{config.token}"
         if body
           req.headers['Content-Type'] = 'application/json'
           req.body = body.to_json
-          config.logger&.debug(req.body)
         end
         req.options.timeout = config.timeout if config.timeout
         req.options.open_timeout = config.open_timeout if config.open_timeout
