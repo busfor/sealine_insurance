@@ -8,7 +8,7 @@ describe 'calculate insurance price' do
   end
 
   it 'calculates price and returns result' do
-    VCR.use_cassette('calculate_and_fetch_result') do
+    VCR.use_strict_cassette('calculate_and_fetch_result') do
       operation = client.calculate(
         product_type: 'transport',
         products: %w[vsk_trans],

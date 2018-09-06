@@ -24,7 +24,7 @@ describe 'create order' do
   end
 
   it 'creates order and returns result' do
-    VCR.use_cassette('create_order_and_fetch_reslult') do
+    VCR.use_strict_cassette('create_order_and_fetch_reslult') do
       operation = client.create_order(**valid_params)
       assert_equal false, operation.finished?
 
