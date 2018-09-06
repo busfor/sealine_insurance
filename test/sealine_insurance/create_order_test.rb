@@ -16,9 +16,11 @@ describe 'create order' do
       departure_datetime: Time.new(2018, 8, 1, 10, 0, 0),
       arrival_datetime: Time.new(2018, 8, 1, 18, 0, 0),
       insured_first_name: 'Иван',
+      insured_middle_name: 'Иванович',
       insured_last_name: 'Иванов',
       insured_birthday: Date.new(1985, 1, 15),
       insurer_first_name: 'Петр',
+      insurer_middle_name: 'Петрович',
       insurer_last_name: 'Петров',
     }
   end

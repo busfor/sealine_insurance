@@ -14,9 +14,11 @@ module SealineInsurance
         departure_datetime:,
         arrival_datetime:,
         insured_first_name:,
+        insured_middle_name:,
         insured_last_name:,
         insured_birthday:,
         insurer_first_name:,
+        insurer_middle_name:,
         insurer_last_name:
       )
         super(config: config)
@@ -28,9 +30,11 @@ module SealineInsurance
         @departure_datetime = departure_datetime
         @arrival_datetime = arrival_datetime
         @insured_first_name = insured_first_name
+        @insured_middle_name = insured_middle_name
         @insured_last_name = insured_last_name
         @insured_birthday = insured_birthday
         @insurer_first_name = insurer_first_name
+        @insurer_middle_name = insurer_middle_name
         @insurer_last_name = insurer_last_name
       end
       # rubocop:enable Metrics/ParameterLists
@@ -47,11 +51,13 @@ module SealineInsurance
             arrival: @arrival_datetime.strftime('%Y-%m-%dT%H:%M'),
             insured: {
               first_name: @insured_first_name,
+              middle_name: @insured_middle_name,
               last_name: @insured_last_name,
               birthday: @insured_birthday.strftime('%Y-%m-%d'),
             },
             insurer: {
               first_name: @insurer_first_name,
+              middle_name: @insurer_middle_name,
               last_name: @insurer_last_name,
             },
           },
