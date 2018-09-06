@@ -16,17 +16,15 @@ describe 'create order' do
       departure_datetime: Time.new(2018, 8, 1, 10, 0, 0),
       arrival_datetime: Time.new(2018, 8, 1, 18, 0, 0),
       insured_first_name: 'Иван',
-      insured_middle_name: 'Иванович',
       insured_last_name: 'Иванов',
       insured_birthday: Date.new(1985, 1, 15),
       insurer_first_name: 'Петр',
-      insurer_middle_name: 'Петрович',
       insurer_last_name: 'Петров',
     }
   end
 
   it 'creates order and returns result' do
-    VCR.use_cassette('create_order_and_fetch_reslult') do
+    VCR.use_strict_cassette('create_order_and_fetch_reslult') do
       operation = client.create_order(**valid_params)
       assert_equal false, operation.finished?
 
