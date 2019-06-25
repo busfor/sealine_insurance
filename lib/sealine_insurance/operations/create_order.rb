@@ -48,7 +48,7 @@ module SealineInsurance
             ticket_number: @ticket_number.to_i,
             ticket_price: @ticket_price.to_i,
             departure: @departure_datetime.strftime('%Y-%m-%dT%H:%M'),
-            arrival: @arrival_datetime.strftime('%Y-%m-%dT%H:%M'),
+            arrival: @arrival_datetime&.strftime('%Y-%m-%dT%H:%M'),
             insured: {
               first_name: @insured_first_name,
               middle_name: @insured_middle_name,

@@ -43,6 +43,26 @@ describe 'create order' do
     end
   end
 
+  it 'creates order and returns result without arrival_datetime parameter' do
+    VCR.use_strict_cassette('create_order_and_fetch_reslult_without_arrival_time') do
+      operation = client.create_order(**valid_params.merge(arrival_datetime: nil))
+      assert_equal false, operation.finished?
+
+      response = operation.response
+      assert_equal 7311, response.order_id
+      assert_equal 'IN_PROGRESS', response.status
+
+      operation.fetch_status!
+      assert_equal true, operation.finished?
+      assert_equal true, operation.success?
+
+      result = operation.result
+      assert_equal 7311, result.order_id
+      assert_equal 'NEED_PAYMENT', result.status
+      assert_equal Money.new(70_00, 'RUB'), result.price
+    end
+  end
+
   describe 'params validation errors' do
     it 'returns error with invalid product' do
       operation =
